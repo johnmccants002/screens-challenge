@@ -1,14 +1,35 @@
-import { StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, TouchableOpacity } from "react-native";
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+import EditScreenInfo from "@/components/EditScreenInfo";
+import { Text, View } from "@/components/Themed";
+import { Link } from "expo-router";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <Link href="/costco-shop" asChild>
+        <Pressable style={styles.row}>
+          {({ pressed }) => (
+            <View
+              style={{
+                justifyContent: "space-between",
+                flexDirection: "row",
+                width: "100%",
+                borderBottomWidth: 2,
+                backgroundColor: "white",
+                borderBottomColor: "gray",
+                alignItems: "center",
+                paddingHorizontal: 8,
+                height: 60,
+              }}
+            >
+              <Text style={styles.textLabel}> Costco Shop Screen </Text>
+              <FontAwesome name="caret-right" size={30} color={"black"} />
+            </View>
+          )}
+        </Pressable>
+      </Link>
     </View>
   );
 }
@@ -16,16 +37,26 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   separator: {
     marginVertical: 30,
     height: 1,
-    width: '80%',
+    width: "80%",
+  },
+  row: {
+    width: "auto",
+    height: 60,
+    flexDirection: "row",
+
+    alignItems: "center",
+  },
+  textLabel: {
+    paddingLeft: 20,
+    fontFamily: "AmericanTypewriter-Bold",
+    color: "black",
   },
 });
