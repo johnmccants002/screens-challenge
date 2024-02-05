@@ -26,7 +26,8 @@ const categories = [
   { title: "Kitchen", icon: "coffee" },
   { title: "Home Improvement", icon: "wrench" },
   { title: "Office Products", icon: "briefcase" },
-  { title: "Jewelry", icon: "gem" },
+  { title: "Jewelry", icon: "life-ring" },
+  { title: "Computers", icon: "laptop" },
 ];
 
 const featuredCategories = [
@@ -35,30 +36,17 @@ const featuredCategories = [
   { title: "Travel", icon: "plane" },
 ];
 
-const sections = [
-  {
-    title: "Featured Services",
-    data: [{}], // Single item array to render the custom component once
-  },
-  {
-    title: "All Departments",
-    data: categories,
-  },
-];
-
 export default function Screen() {
-  const renderThreeDepartments = (items) => (
-    <View style={styles.featuredServicesContainer}>
-      {items.map((item, index) => (
-        <View style={styles.featuredItemContainer} key={index}>
-          <View style={styles.iconContainer}>
-            <FontAwesome name={item.icon} color="red" size={40} />
-          </View>
-          <Text style={styles.itemText}>{item.title}</Text>
-        </View>
-      ))}
-    </View>
-  );
+  const sections = [
+    {
+      title: "Featured Services",
+      data: [{}], // Single item array to render the custom component once
+    },
+    {
+      title: "All Departments",
+      data: chunkArray(categories, 3),
+    },
+  ];
 
   function chunkArray(array, chunkSize) {
     const result = [];
@@ -67,15 +55,6 @@ export default function Screen() {
     }
     return result;
   }
-
-  const renderCategoriesInGroupsOfThree = () => {
-    const categoryChunks = chunkArray(categories, 3);
-    return categoryChunks.map((chunk, index) => (
-      <React.Fragment key={index}>
-        {renderThreeDepartments(chunk)}
-      </React.Fragment>
-    ));
-  };
 
   const renderFeaturedServices = () => (
     <View>
@@ -118,7 +97,18 @@ export default function Screen() {
             return renderFeaturedServices();
           } else {
             // Correctly return JSX for the "else" case
-            return <View>{renderCategoriesInGroupsOfThree()}</View>;
+            return (
+              <View style={styles.featuredServicesContainer}>
+                {item.map((item, index) => (
+                  <View style={styles.featuredItemContainer} key={index}>
+                    <View style={styles.iconContainer}>
+                      <FontAwesome name={item.icon} color="red" size={40} />
+                    </View>
+                    <Text style={styles.itemText}>{item.title}</Text>
+                  </View>
+                ))}
+              </View>
+            );
           }
         }}
         renderSectionHeader={({ section: { title } }) =>
