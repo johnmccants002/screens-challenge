@@ -30,6 +30,28 @@ export default function TabOneScreen() {
           )}
         </Pressable>
       </Link>
+      <Link href="/restaurant-map" asChild>
+        <Pressable style={styles.row}>
+          {({ pressed }) => (
+            <View
+              style={{
+                justifyContent: "space-between",
+                flexDirection: "row",
+                width: "100%",
+                borderBottomWidth: 2,
+                backgroundColor: "white",
+                borderBottomColor: "gray",
+                alignItems: "center",
+                paddingHorizontal: 8,
+                height: 60,
+              }}
+            >
+              <Text style={styles.textLabel}> Restaurant Map Screen </Text>
+              <FontAwesome name="caret-right" size={30} color={"black"} />
+            </View>
+          )}
+        </Pressable>
+      </Link>
     </View>
   );
 }

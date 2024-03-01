@@ -89,6 +89,12 @@ function RootLayoutNav() {
             headerTitle: "",
           }}
         />
+        <Stack.Screen
+          name="restaurant-map"
+          options={{
+            headerShown: true,
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );
