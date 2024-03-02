@@ -5,53 +5,45 @@ import { Text, View } from "@/components/Themed";
 import { Link } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
+const screens = [
+  {
+    path: "/costco-shop",
+    label: "Costco Shop Screen",
+  },
+  {
+    path: "/restaurant-map",
+    label: "Restaurant Map Screen",
+  },
+  {
+    path: "/diary",
+    label: "Diary",
+  },
+  {
+    path: "/compatibility",
+    label: "Compatibility Checker",
+  },
+  {
+    path: "/plants",
+    label: "Plant Home Screen",
+  },
+  // Add more screens as needed
+];
+
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Link href="/costco-shop" asChild>
-        <Pressable style={styles.row}>
-          {({ pressed }) => (
-            <View
-              style={{
-                justifyContent: "space-between",
-                flexDirection: "row",
-                width: "100%",
-                borderBottomWidth: 2,
-                backgroundColor: "white",
-                borderBottomColor: "gray",
-                alignItems: "center",
-                paddingHorizontal: 8,
-                height: 60,
-              }}
-            >
-              <Text style={styles.textLabel}> Costco Shop Screen </Text>
-              <FontAwesome name="caret-right" size={30} color={"black"} />
-            </View>
-          )}
-        </Pressable>
-      </Link>
-      <Link href="/restaurant-map" asChild>
-        <Pressable style={styles.row}>
-          {({ pressed }) => (
-            <View
-              style={{
-                justifyContent: "space-between",
-                flexDirection: "row",
-                width: "100%",
-                borderBottomWidth: 2,
-                backgroundColor: "white",
-                borderBottomColor: "gray",
-                alignItems: "center",
-                paddingHorizontal: 8,
-                height: 60,
-              }}
-            >
-              <Text style={styles.textLabel}> Restaurant Map Screen </Text>
-              <FontAwesome name="caret-right" size={30} color={"black"} />
-            </View>
-          )}
-        </Pressable>
-      </Link>
+      {screens.map((screen) => (
+        <Link key={screen.path} href={screen.path} asChild>
+          <Pressable>
+            {({ pressed }) => (
+              <View style={styles.rowContainer}>
+                <Text style={styles.textLabel}>{screen.label}</Text>
+                <FontAwesome name="caret-right" size={30} color={"black"} />
+              </View>
+            )}
+          </Pressable>
+        </Link>
+      ))}
     </View>
   );
 }
@@ -59,6 +51,7 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    gap: 20,
   },
   title: {
     fontSize: 20,
@@ -68,6 +61,11 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "80%",
+  },
+  rowContainer: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+    paddingHorizontal: 10,
   },
   row: {
     width: "auto",
