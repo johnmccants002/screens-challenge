@@ -26,6 +26,10 @@ const screens = [
     path: "/plants",
     label: "Plant Home Screen",
   },
+  {
+    path: "/volunteer",
+    label: "Volunteer Feed",
+  },
   // Add more screens as needed
 ];
 
