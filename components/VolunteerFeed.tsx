@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import {
   Card,
   Button,
@@ -10,6 +10,7 @@ import {
 } from "react-native-paper";
 
 import DropdownMenu from "./DropdownMenu";
+import { Link } from "expo-router";
 
 interface Opportunity {
   id: string;
@@ -59,6 +60,19 @@ const VolunteerFeed: React.FC = () => {
   return (
     <Provider>
       <ScrollView style={styles.container}>
+        <Link
+          href="/volunteer/commitments"
+          style={styles.viewCommitmentsLink}
+          asChild
+        >
+          <Button
+            icon="calendar-check"
+            mode="contained"
+            style={styles.viewCommitmentsButton}
+          >
+            View My Commitments
+          </Button>
+        </Link>
         <DropdownMenu
           label="Filter by Category"
           value={selectedCategory}
@@ -68,15 +82,23 @@ const VolunteerFeed: React.FC = () => {
 
         <View style={{ paddingTop: 20 }}>
           {opportunities.map((opportunity) => (
-            <Card key={opportunity.id} style={styles.card}>
-              <Card.Content>
-                <Title>{opportunity.title}</Title>
-                <Paragraph>{opportunity.description}</Paragraph>
-              </Card.Content>
-              <Card.Actions>
-                <Button>Learn More</Button>
-              </Card.Actions>
-            </Card>
+            <Link
+              href={`/volunteer/${opportunity.id}`}
+              asChild
+              key={opportunity.id}
+            >
+              <Pressable>
+                <Card key={opportunity.id} style={styles.card}>
+                  <Card.Content>
+                    <Title>{opportunity.title}</Title>
+                    <Paragraph>{opportunity.description}</Paragraph>
+                  </Card.Content>
+                  <Card.Actions>
+                    <Button>Learn More</Button>
+                  </Card.Actions>
+                </Card>
+              </Pressable>
+            </Link>
           ))}
         </View>
       </ScrollView>
@@ -97,6 +119,12 @@ const styles = StyleSheet.create({
   },
   card: {
     marginBottom: 8,
+  },
+  viewCommitmentsLink: {
+    marginBottom: 16, // Adjust spacing as needed
+  },
+  viewCommitmentsButton: {
+    backgroundColor: "#6200ee", // Use your theme's primary or accent color
   },
 });
 
